@@ -1209,6 +1209,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.0.tgz#a5417ae8427873f1dd08b70b3574b453e67b5f7f"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
+"@freakycoder/react-native-bounceable@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@freakycoder/react-native-bounceable/-/react-native-bounceable-1.0.3.tgz#79de6fa99fb8357a5e52cc095ecdb1786f4b1514"
+  integrity sha512-+iMq2tnqxCwFjitbPUz9nZ+VfJ8OU9waIlDJAAsoq1229QEwCmERCNy5zVtDsz75q3i4FLXX/n7fimdMzmP21A==
+
 "@hapi/hoek@^9.0.0", "@hapi/hoek@^9.3.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"
@@ -5829,6 +5834,13 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-native-bouncy-checkbox@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-bouncy-checkbox/-/react-native-bouncy-checkbox-4.0.1.tgz#4aee76694c8dac07b6d2c843613fa109aa226529"
+  integrity sha512-dlywsd3PWF47tkZKWFtnArtGM66Hkk1iUvlQhxSbnI56eo8BaQ4VnGFsrGxA3Jc/B7KDuzS9RCtaEflJJT5gYA==
+  dependencies:
+    "@freakycoder/react-native-bounceable" "^1.0.3"
 
 react-native-config@^1.5.1:
   version "1.5.1"
