@@ -28,7 +28,12 @@ export function CelebrityListItem({
   isFavourite,
   flatListRef,
   onFavouriteTap,
+  onTap,
 }: IProps) {
+  function onItemPress() {
+    onTap(celebrity.id);
+  }
+
   function toggleFavourite(like: boolean) {
     onFavouriteTap(celebrity.id, like);
     releaseSwipe(0);
@@ -45,7 +50,11 @@ export function CelebrityListItem({
 
   const panResponder = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponder: () => false,
+      onStartShouldSetPanResponderCapture: () => false,
+      onMoveShouldSetPanResponder: () => false,
+      onMoveShouldSetPanResponderCapture: (evt, {dx, dy}) =>
+        dx !== 0 || dy !== 0,
       onPanResponderMove: (_event, gestureState) => {
         if (gestureState.dx > SWIPE_THRESHOLD) {
           const newX =
@@ -86,7 +95,10 @@ export function CelebrityListItem({
       <TouchableOpacity
         disabled={!isFavourite}
         activeOpacity={0.7}
-        onPress={() => toggleFavourite(false)}>
+        onPress={ev => {
+          ev.stopPropagation();
+          toggleFavourite(false);
+        }}>
         <View
           style={[
             celebrityListItemStyles.iconContainer,
@@ -98,7 +110,10 @@ export function CelebrityListItem({
       <TouchableOpacity
         activeOpacity={0.7}
         disabled={isFavourite}
-        onPress={() => toggleFavourite(true)}>
+        onPress={ev => {
+          ev.stopPropagation();
+          toggleFavourite(true);
+        }}>
         <View
           style={[
             celebrityListItemStyles.iconContainer,
@@ -114,27 +129,31 @@ export function CelebrityListItem({
           {transform: [{translateX: pan.x}, {translateY: pan.y}]},
         ]}
         {...panResponder.panHandlers}>
-        <Image
-          style={celebrityListItemStyles.image}
-          width={60}
-          height={90}
-          source={{uri: celebrity.avatar}}
-        />
-        <View style={celebrityListItemStyles.infoContainer}>
-          <Text
-            style={[
-              celebrityListItemStyles.info,
-              celebrityListItemStyles.name,
-            ]}>
-            {celebrity?.name}
-          </Text>
-          <Text style={celebrityListItemStyles.info}>
-            {celebrity?.department}
-          </Text>
-        </View>
-        <View style={celebrityListItemStyles.likeInfo}>
-          {isFavourite ? <LikeIconFilled /> : <LikeIcon fill="red" />}
-        </View>
+        <TouchableOpacity onPress={onItemPress} activeOpacity={0.7}>
+          <View style={celebrityListItemStyles.containerInner}>
+            <Image
+              style={celebrityListItemStyles.image}
+              width={60}
+              height={90}
+              source={{uri: celebrity.avatar}}
+            />
+            <View style={celebrityListItemStyles.infoContainer}>
+              <Text
+                style={[
+                  celebrityListItemStyles.info,
+                  celebrityListItemStyles.name,
+                ]}>
+                {celebrity?.name}
+              </Text>
+              <Text style={celebrityListItemStyles.info}>
+                {celebrity?.department}
+              </Text>
+            </View>
+            <View style={celebrityListItemStyles.likeInfo}>
+              {isFavourite ? <LikeIconFilled /> : <LikeIcon fill="red" />}
+            </View>
+          </View>
+        </TouchableOpacity>
       </Animated.View>
     </View>
   );

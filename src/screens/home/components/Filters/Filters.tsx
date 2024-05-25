@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, SafeAreaView, FlatList, ListRenderItem} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import {Department, Gender} from '../../api/interfaces.ts';
 import {getEnumKeys} from '../../../../infrastructure/helpers.ts';
 import {celebritiesListService} from '../../home.service.ts';
-import { filtersStyles } from "./Filters.styles.ts";
+import {filtersStyles} from './Filters.styles.ts';
+import {Department, Gender} from '../../../../enums.ts';
 
 export function Filters() {
   const renderDepartment: ListRenderItem<string> = ({item}) => {

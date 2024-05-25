@@ -1,7 +1,7 @@
 import {computed, makeAutoObservable, runInAction} from 'mobx';
 import {Celebrity} from './api/dto.ts';
 import {CelebritiesListRepository} from './api/repository.ts';
-import {Department, Gender} from './api/interfaces.ts';
+import {Department, Gender} from '../../enums.ts';
 
 interface ILikedDisliked {
   liked: boolean;

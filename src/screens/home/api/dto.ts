@@ -1,5 +1,6 @@
 import Config from 'react-native-config';
-import {Department, Gender, ICelebrityListItem} from './interfaces.ts';
+import {ICelebrityListItem} from './interfaces.ts';
+import {Department, Gender} from '../../../enums.ts';
 
 export class Celebrity {
   public id: number;

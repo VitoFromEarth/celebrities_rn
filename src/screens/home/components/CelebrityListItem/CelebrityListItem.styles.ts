@@ -1,14 +1,18 @@
 import {StyleSheet} from 'react-native';
-import {Gender} from '../../api/interfaces.ts';
+import {Gender} from '../../../../enums.ts';
 
 export const celebrityListItemStyles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
     gap: 10,
     borderWidth: 1,
     borderRadius: 5,
     borderColor: 'lightgrey',
+  },
+  containerInner: {
+    flexDirection: 'row',
+    gap: 10,
+    justifyContent: 'space-between',
   },
   infoContainer: {
     paddingVertical: 10,
@@ -54,5 +58,6 @@ export const celebrityListItemStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 15,
+    flex: 1,
   },
 });
