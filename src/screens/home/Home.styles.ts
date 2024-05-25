@@ -11,8 +11,9 @@ export const homeStyles = StyleSheet.create({
     borderColor: 'lightgrey',
     borderRadius: 5,
     padding: 10,
+    color: 'black',
   },
   inputContainer: {
     padding: 10,
-  }
+  },
 });

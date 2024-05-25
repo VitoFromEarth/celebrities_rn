@@ -63,12 +63,14 @@ export function Filters() {
         <FlatList
           keyExtractor={item => item}
           data={getEnumKeys(Department)}
+          contentContainerStyle={filtersStyles.listContainer}
           renderItem={renderDepartment}
         />
         <Text style={filtersStyles.subHeader}>Gender</Text>
         <FlatList
           keyExtractor={item => item}
           data={getEnumKeys(Gender)}
+          contentContainerStyle={filtersStyles.listContainer}
           renderItem={renderGender}
         />
         <Text style={filtersStyles.subHeader}>Liked/Disliked</Text>

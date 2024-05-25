@@ -91,6 +91,7 @@ const HomeComponent = observer(
             onChangeText={onSearch}
             style={homeStyles.textInput}
             placeholder="Search by actor name"
+            placeholderTextColor="black"
           />
         </View>
         <FlatList

@@ -20,9 +20,11 @@ export const celebrityListItemStyles = StyleSheet.create({
   },
   info: {
     fontSize: 16,
+    color: 'black',
   },
   name: {
     fontWeight: 'bold',
+    color: 'black',
   },
   image: {
     borderRadius: 5,
