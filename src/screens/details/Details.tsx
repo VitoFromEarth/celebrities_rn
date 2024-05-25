@@ -65,11 +65,16 @@ export const DetailsScreen = observer((props: Props) => {
         />
         <View style={CelebrityDetailsStyles.textData}>
           <Text style={CelebrityDetailsStyles.name}>{celebrity.name}</Text>
-          <Text style={CelebrityDetailsStyles.text}>Known for playing in</Text><Text style={CelebrityDetailsStyles.hightlight}>{activeMovie?.title}</Text>
+          <Text style={CelebrityDetailsStyles.text}>Known for playing in</Text>
+          <Text style={CelebrityDetailsStyles.hightlight}>
+            {activeMovie?.title}
+          </Text>
           <Text style={CelebrityDetailsStyles.text}>
             The movie release data is
           </Text>
-          <Text style={CelebrityDetailsStyles.hightlight}>{formatDate(activeMovie?.releaseDate)}</Text>
+          <Text style={CelebrityDetailsStyles.hightlight}>
+            {formatDate(activeMovie?.releaseDate)}
+          </Text>
         </View>
       </View>
       <View style={CelebrityDetailsStyles.overviewContainer}>
