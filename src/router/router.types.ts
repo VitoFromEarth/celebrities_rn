@@ -1,6 +1,6 @@
 export type RootStackParamList = {
   Home: undefined;
-  Details: {userId: string};
+  Details: {userId: number};
 };
 
 export type DrawerStackParamList = {
