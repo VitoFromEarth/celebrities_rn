@@ -5,7 +5,7 @@ export const CelebrityDetailsStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 15,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   image: {
     borderRadius: 5,
@@ -18,9 +18,11 @@ export const CelebrityDetailsStyles = StyleSheet.create({
   name: {
     fontWeight: 'bold',
     fontSize: 16,
+    color: 'black',
   },
   hightlight: {
     fontWeight: 'bold',
+    color: 'black',
   },
   overviewContainer: {
     paddingHorizontal: 15,
@@ -29,5 +31,9 @@ export const CelebrityDetailsStyles = StyleSheet.create({
     paddingVertical: 15,
     fontWeight: 'bold',
     fontSize: 16,
-  }
+    color: 'black',
+  },
+  text: {
+    color: 'black',
+  },
 });
