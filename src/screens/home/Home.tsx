@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef} from 'react';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {FlatList, ListRenderItem, Text, View} from 'react-native';
+import {FlatList, ListRenderItem, Text, TextInput, View} from 'react-native';
 import {observer} from 'mobx-react-lite';
 
 import {
@@ -53,6 +53,10 @@ const HomeComponent = observer(
       celebritiesListService.toggleCelebrityLike(userId, like);
     }
 
+    function onSearch(text: string) {
+      celebritiesListService.searchCelebrities(text);
+    }
+
     const renderCelebrityItem: ListRenderItem<Celebrity> = useCallback(
       ({item}) => {
         const isFavourite: boolean =
@@ -82,11 +86,18 @@ const HomeComponent = observer(
 
     return (
       <View>
+        <View style={homeStyles.inputContainer}>
+          <TextInput
+            onChangeText={onSearch}
+            style={homeStyles.textInput}
+            placeholder="Search by actor name"
+          />
+        </View>
         <FlatList
           ref={flatListRef}
           contentContainerStyle={homeStyles.listContainer}
           keyExtractor={(item, index) => `${item.id.toString()}-${index}`}
-          data={celebritiesListService.celebrities}
+          data={celebritiesListService.filteredCelebrities}
           renderItem={renderCelebrityItem}
         />
       </View>

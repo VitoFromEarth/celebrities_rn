@@ -1,16 +1,29 @@
-import {makeAutoObservable, runInAction} from 'mobx';
+import {computed, makeAutoObservable, runInAction} from 'mobx';
 import {Celebrity} from './api/dto.ts';
 import {CelebritiesListRepository} from './api/repository.ts';
 
 class CelebritiesListService {
-  public celebrities: Celebrity[] = [];
   public likedCelebritiesIds: number[] = [];
   public loading: boolean = false;
+  private _searchFilter: string = '';
+  private _celebrities: Celebrity[] = [];
   private _repository: CelebritiesListRepository =
     new CelebritiesListRepository();
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      filteredCelebrities: computed,
+    });
+  }
+
+  public get filteredCelebrities() {
+    if (this._searchFilter.length) {
+      return this._celebrities.filter(celebrity =>
+        celebrity.name.toLowerCase().includes(this._searchFilter.toLowerCase()),
+      );
+    }
+
+    return this._celebrities;
   }
 
   public async getCelebrities() {
@@ -20,7 +33,7 @@ class CelebritiesListService {
         this._composeCelebritiesRequest(),
       );
       runInAction(() => {
-        this.celebrities = celebritiesResponse.flat();
+        this._celebrities = celebritiesResponse.flat();
         this.loading = false;
       });
     } catch (error) {
@@ -37,6 +50,10 @@ class CelebritiesListService {
         celebId => celebId !== id,
       );
     }
+  }
+
+  public searchCelebrities(search: string): void {
+    this._searchFilter = search;
   }
 
   private _composeCelebritiesRequest(): Promise<Celebrity[]>[] {

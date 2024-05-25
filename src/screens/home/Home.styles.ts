@@ -6,4 +6,13 @@ export const homeStyles = StyleSheet.create({
     gap: 5,
     paddingHorizontal: 15,
   },
+  textInput: {
+    borderWidth: 1,
+    borderColor: 'lightgrey',
+    borderRadius: 5,
+    padding: 10,
+  },
+  inputContainer: {
+    padding: 10,
+  }
 });
