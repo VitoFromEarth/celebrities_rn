@@ -1,14 +1,22 @@
 import React, {useEffect} from 'react';
+
 import {observer} from 'mobx-react-lite';
-import {Image, Text, View} from 'react-native';
+import {Image, ScrollView, Text, View} from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../router/router.types.ts';
 import {celebrityDetailsService} from './details.service.ts';
-import {Celebrity} from './api/dto.ts';
+import {Celebrity, Movie} from './api/dto.ts';
+import {MoviesCarousel} from './components/MoviesCarousel.tsx';
+import {formatDate} from '../../infrastructure/helpers.ts';
+import {CelebrityDetailsStyles} from './Details.styles.ts';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Details'>;
 
 export const DetailsScreen = observer((props: Props) => {
+  const [activeMovie, setActiveMovie] = React.useState<Movie | undefined>(
+    undefined,
+  );
   const {userId} = props.route.params;
 
   const celebrity: Celebrity | undefined = celebrityDetailsService.celebrity;
@@ -17,6 +25,14 @@ export const DetailsScreen = observer((props: Props) => {
       celebrityDetailsService.getCelebrityDetailsBy(userId);
     }
   }, [userId]);
+
+  useEffect(() => {
+    setActiveMovie(celebrity?.movies[0]);
+  }, [celebrity?.movies]);
+
+  function onMovieChanged(movieIndex: number) {
+    setActiveMovie(celebrity?.movies[movieIndex]);
+  }
 
   if (celebrityDetailsService.loading) {
     return (
@@ -35,17 +51,31 @@ export const DetailsScreen = observer((props: Props) => {
   }
 
   return (
-    <View>
-      <View>
-        <Image width={150} height={250} source={{uri: celebrity.avatar}} />
-        <Text>{celebrity.name}</Text>
-        <Text>Known for playing in {celebrity.name}</Text>
-        <Text>The movie release data is {celebrity.name}</Text>
+    <ScrollView style={{flexDirection: 'column'}}>
+      <MoviesCarousel
+        onMovieChange={onMovieChanged}
+        movies={celebrity.movies}
+      />
+      <View style={CelebrityDetailsStyles.container}>
+        <Image
+          style={CelebrityDetailsStyles.image}
+          width={150}
+          height={250}
+          source={{uri: celebrity.avatar}}
+        />
+        <View style={CelebrityDetailsStyles.textData}>
+          <Text style={CelebrityDetailsStyles.name}>{celebrity.name}</Text>
+          <Text>Known for playing in</Text><Text style={CelebrityDetailsStyles.hightlight}>{activeMovie?.title}</Text>
+          <Text>
+            The movie release data is
+          </Text>
+          <Text style={CelebrityDetailsStyles.hightlight}>{formatDate(activeMovie?.releaseDate)}</Text>
+        </View>
       </View>
-      <View>
-        <Text>Overview</Text>
-        <Text></Text>
+      <View style={CelebrityDetailsStyles.overviewContainer}>
+        <Text style={CelebrityDetailsStyles.overviewHeader}>Overview</Text>
+        <Text>{activeMovie?.overview}</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 });

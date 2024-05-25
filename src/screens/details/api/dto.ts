@@ -18,7 +18,7 @@ export class Celebrity {
 export class Movie {
   public id: number;
   public title: string;
-  public cover: string;
+  public cover: string | null;
   public overview: string;
   public releaseDate: string;
 
@@ -27,6 +27,8 @@ export class Movie {
     this.overview = dataFromAPI.overview;
     this.releaseDate = dataFromAPI.release_date;
     this.title = dataFromAPI.title;
-    this.cover = `${Config.IMAGE_BASE_URL}${dataFromAPI.backdrop_path}`;
+    this.cover = dataFromAPI.backdrop_path
+      ? `${Config.IMAGE_BASE_URL}${dataFromAPI.backdrop_path}`
+      : null;
   }
 }
