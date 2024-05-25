@@ -14,5 +14,6 @@ export const MoviesCarouselStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'lightgrey',
     borderRadius: 5,
-  }
+  },
+  noImageText: {textAlign: 'center', fontSize: 30, color: 'black'},
 });

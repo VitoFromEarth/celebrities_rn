@@ -39,9 +39,7 @@ export function MoviesCarousel({movies, onMovieChange}: IProps) {
                 source={{uri: item.cover}}
               />
             ) : (
-              <Text style={{textAlign: 'center', fontSize: 30}}>
-                No Image :(
-              </Text>
+              <Text style={MoviesCarouselStyles.noImageText}>No Image :(</Text>
             )}
           </View>
         )}
